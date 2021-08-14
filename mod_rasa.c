@@ -15,7 +15,7 @@ SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 //  mod_rasa_runtime(NULL),
 //  SMODF_NONE
 // }
-SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, mod_rasa_runtime,NULL);
+SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, mod_rasa_runtime, NULL);
 
 
 // Actually it explains as followings:

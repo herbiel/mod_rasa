@@ -5,8 +5,7 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load);
 //SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime);
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 
-extern "C"
-{
+
 // Actually it explains as followings:
 // static const char modname[] = "mod_rasa";
 // SWITCH_MOD_DECLARE_DATA switch_loadable_module_function_table_t mod_rasa_module_interface ={
@@ -17,7 +16,7 @@ extern "C"
 //  SMODF_NONE
 // }
 SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
-}
+
 
 // Actually it explains as followings:
 // switch_status_t mod_rasa_load(switch_loadable_module_interface_t **module_interface, switch_memory_pool_t *pool)

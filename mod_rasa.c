@@ -15,7 +15,7 @@ SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 //  mod_rasa_runtime(NULL),
 //  SMODF_NONE
 // }
-SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
+SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, mod_rasa_runtime,NULL);
 
 
 // Actually it explains as followings:
@@ -27,9 +27,9 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
     return SWITCH_STATUS_SUCCESS;
 }
 
-SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime)
-{
+SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime){
 		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "In test");
+		return SWITCH_STATUS_SUCCESS;
 }
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown)
 {

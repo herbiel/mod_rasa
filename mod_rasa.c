@@ -2,7 +2,7 @@
 
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load);
-//SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime);
+SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime);
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 
 
@@ -27,6 +27,10 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
     return SWITCH_STATUS_SUCCESS;
 }
 
+SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime)
+{
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "In test");
+}
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown)
 {
     return SWITCH_STATUS_SUCCESS;

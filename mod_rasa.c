@@ -59,7 +59,7 @@ SWITCH_STANDARD_API(rasa_function){
 
 
 	// switch_ivr_originate(NULL, &peer_session, &cause, NULL, 0, NULL, NULL, NULL, NULL, NULL, SOF_NONE, NULL, dh);
-    int http_code;
+    long http_code;
 	CURL *curl;
     CURLcode res;
     struct curl_slist *headers = NULL;
@@ -75,7 +75,7 @@ SWITCH_STANDARD_API(rasa_function){
         curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
     }
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "%s\n", http_code);
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "%d\n", http_code);
 
 	return SWITCH_STATUS_SUCCESS;
 }

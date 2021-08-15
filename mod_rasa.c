@@ -18,7 +18,6 @@ SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
 
 SWITCH_STANDARD_API(rasa_function){
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello rasa!\n");
 	switch_dial_handle_t *dh;
 	switch_dial_leg_list_t *ll;
 	switch_dial_leg_t *leg = NULL;
@@ -32,6 +31,8 @@ SWITCH_STANDARD_API(rasa_function){
 	switch_dial_handle_add_leg_list(dh, &ll);
 
 	switch_dial_leg_list_add_leg(ll, &leg, "user/1002");
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello rasa!\n");
+
 	return SWITCH_STATUS_SUCCESS;
 }
 // Actually it explains as followings:

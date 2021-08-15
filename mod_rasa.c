@@ -75,7 +75,7 @@ SWITCH_STANDARD_API(rasa_function){
         curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
     }
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "%d\n", http_code);
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "%s\n", http_code);
 
 	return SWITCH_STATUS_SUCCESS;
 }

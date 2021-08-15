@@ -59,7 +59,7 @@ SWITCH_STANDARD_API(rasa_function){
 
 
 	// switch_ivr_originate(NULL, &peer_session, &cause, NULL, 0, NULL, NULL, NULL, NULL, NULL, SOF_NONE, NULL, dh);
-    long http_code;
+    int http_code;
 	CURL *curl;
     CURLcode res;
     struct curl_slist *headers = NULL;

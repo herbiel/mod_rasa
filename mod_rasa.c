@@ -17,7 +17,10 @@ SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 // }
 SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
 
+SWITCH_STANDARD_API(rasa_function){
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello rasa!\n");
 
+}
 // Actually it explains as followings:
 // switch_status_t mod_rasa_load(switch_loadable_module_interface_t **module_interface, switch_memory_pool_t *pool)
 SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
@@ -28,10 +31,7 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
     return SWITCH_STATUS_SUCCESS;
 }
 
-SWITCH_STANDARD_API(rasa_function){
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello rasa!\n");
 
-}
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown)
 {
     return SWITCH_STATUS_SUCCESS;

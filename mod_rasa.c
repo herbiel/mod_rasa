@@ -17,11 +17,12 @@ SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 // }
 SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
 
+#define MAX_PEERS 128
 SWITCH_STANDARD_API(rasa_function){
 	switch_dial_handle_t *dh;
 	switch_dial_leg_list_t *ll;
 	switch_dial_leg_t *leg = NULL;
-	int timeout = 0;
+
 	char *peer_names[MAX_PEERS] = { 0 };
 	switch_event_t *peer_vars[MAX_PEERS] = { 0 };
 	int i;
@@ -39,6 +40,7 @@ SWITCH_STANDARD_API(rasa_function){
 	switch_dial_leg_list_add_leg(ll, &leg, "user/1002");
 	switch_dial_handle_get_peers(dh, 0, peer_names, MAX_PEERS);
 	switch_dial_handle_get_vars(dh, 0, peer_vars, MAX_PEERS);
+
 	for(i = 0; i < MAX_PEERS; i++) {
 		if (peer_names[i]) {
 			char *foo;

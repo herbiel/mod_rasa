@@ -24,12 +24,13 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
     // init module interface
     *module_interface = switch_loadable_module_create_module_interface(pool, modname);
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello World!\n");
+	SWITCH_ADD_API(api_interface, "rasa", "RASA API", rasa_function, "syntax");
     return SWITCH_STATUS_SUCCESS;
 }
 
-SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime){
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "In test");
-		return SWITCH_STATUS_SUCCESS;
+SWITCH_STANDARD_API(rasa_function){
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello rasa!\n");
+
 }
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown)
 {

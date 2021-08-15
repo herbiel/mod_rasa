@@ -22,12 +22,7 @@ SWITCH_STANDARD_API(rasa_function){
 	switch_dial_handle_t *dh;
 	switch_dial_leg_list_t *ll;
 	switch_dial_leg_t *leg = NULL;
-	int timeout = 0;
-	char *peer_names[MAX_PEERS] = { 0 };
-	switch_event_t *peer_vars[MAX_PEERS] = { 0 };
-	int i;
-	switch_core_session_t *peer_session = NULL;
-	switch_call_cause_t cause;
+
 	
 	switch_dial_handle_create(&dh);
 

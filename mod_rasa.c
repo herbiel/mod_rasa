@@ -21,7 +21,13 @@ SWITCH_STANDARD_API(rasa_function){
 	switch_dial_handle_t *dh;
 	switch_dial_leg_list_t *ll;
 	switch_dial_leg_t *leg = NULL;
-
+	int timeout = 0;
+	char *peer_names[MAX_PEERS] = { 0 };
+	switch_event_t *peer_vars[MAX_PEERS] = { 0 };
+	int i;
+	switch_core_session_t *peer_session = NULL;
+	switch_call_cause_t cause;
+	
 	
 	switch_dial_handle_create(&dh);
 
@@ -31,6 +37,26 @@ SWITCH_STANDARD_API(rasa_function){
 	switch_dial_handle_add_leg_list(dh, &ll);
 
 	switch_dial_leg_list_add_leg(ll, &leg, "user/1002");
+	switch_dial_handle_get_peers(dh, 0, peer_names, MAX_PEERS);
+	switch_dial_handle_get_vars(dh, 0, peer_vars, MAX_PEERS);
+	for(i = 0; i < MAX_PEERS; i++) {
+		if (peer_names[i]) {
+			char *foo;
+			
+			printf("peer: [%s]\n", peer_names[i]);
+
+			if (peer_vars[i]) {
+				if (switch_event_serialize(peer_vars[i], &foo, SWITCH_FALSE) == SWITCH_STATUS_SUCCESS) {
+					printf("%s\n", foo);
+				}
+			}
+			printf("\n\n");
+		}
+	}
+
+
+	switch_ivr_originate(NULL, &peer_session, &cause, NULL, 0, NULL, NULL, NULL, NULL, NULL, SOF_NONE, NULL, dh);
+
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello rasa!\n");
 
 	return SWITCH_STATUS_SUCCESS;

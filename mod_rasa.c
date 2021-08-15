@@ -59,20 +59,23 @@ SWITCH_STANDARD_API(rasa_function){
 
 
 	// switch_ivr_originate(NULL, &peer_session, &cause, NULL, 0, NULL, NULL, NULL, NULL, NULL, SOF_NONE, NULL, dh);
-    CURL *curl;
+    long http_code;
+	CURL *curl;
     CURLcode res;
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "Accept: Agent-007");
     curl = curl_easy_init();    // 初始化
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);// 改协议头
-    curl_easy_setopt(curl, CURLOPT_URL,"http://www.baidu.com");
+    curl_easy_setopt(curl, CURLOPT_URL,"https://www.baidu.com");
     res = curl_easy_perform(curl);   // 执行
+	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+
     if (res != 0) {
 
         curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
     }
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "%d\n", res);
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "%d\n", http_code);
 
 	return SWITCH_STATUS_SUCCESS;
 }

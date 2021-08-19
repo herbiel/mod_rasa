@@ -12,7 +12,7 @@ SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
 
 
 SWITCH_STANDARD_API(rasa_function){
-	int billsec;
+	int32_t billsec = 0
 	switch_channel_t *channel = switch_core_session_get_channel(session);
 	if (switch_channel_get_state(channel) == CS_HANGUP) {
 	billsec = switch_channel_get_variable(channel, "billsec");

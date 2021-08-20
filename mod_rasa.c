@@ -13,7 +13,7 @@ SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
 
 SWITCH_STANDARD_API(rasa_function){
 	const int billsec = 10;
-	switch_channel_t *channel = switch_core_session_get_channel(session);
+	//switch_channel_t *channel = switch_core_session_get_channel(session);
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "%d\n",billsec);
 	return SWITCH_STATUS_SUCCESS;
 

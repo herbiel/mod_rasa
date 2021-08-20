@@ -18,7 +18,7 @@ SWITCH_STANDARD_API(rasa_function){
 	if (!(channel = switch_core_session_get_channel(session))) {
 		return SWITCH_STATUS_SUCCESS;
 	}
-	if switch_channel_get_state(channel) == CS_HANGUP) {
+	if (switch_channel_get_state(channel) == CS_HANGUP) {
 		billsec = switch_channel_get_variable(channel, "billsec");
 	}
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "%s\n",billsec);

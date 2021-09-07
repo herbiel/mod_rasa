@@ -4,7 +4,7 @@
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_asr_load);
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_asr_shutdown);
-SWITCH_MODULE_DEFINITION(mod_hangup_detect, mod_asr_load, mod_asr_shutdown, NULL);
+SWITCH_MODULE_DEFINITION(mod_asr, mod_asr_load, mod_asr_shutdown, NULL);
 
 static struct {
     switch_memory_pool_t *pool;

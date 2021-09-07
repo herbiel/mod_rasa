@@ -31,7 +31,6 @@ typedef struct {
 } standard_audio_t;
 //全局变量
 
-SWITCH_MODULE_DEFINITION(mod_asr, mod_asr_load, mod_asr_shutdown, NULL);
 
 
 static switch_bool_t asr_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)

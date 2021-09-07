@@ -7,7 +7,6 @@ SWITCH_MODULE_DEFINITION(mod_asr, mod_asr_load, mod_asr_shutdown, NULL);
 
 static struct {
     switch_memory_pool_t *pool;
-    int deleteFileScore = 90;
     int maxSampleSec = 10;
     char* pcmDir = "/data/freeswitch";
     char* sampleDir = "/data/freeswitch/sample";

@@ -1,6 +1,6 @@
 #include <switch.h>
 #include <curl/curl.h>
-
+#define MAX_PATH_LEN (256)
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_asr_load);
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_asr_shutdown);
@@ -167,7 +167,3 @@ SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_asr_shutdown)
     return SWITCH_STATUS_SUCCESS;
 }
 
-SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_asr_shutdown)
-{
-    return SWITCH_STATUS_SUCCESS;
-}

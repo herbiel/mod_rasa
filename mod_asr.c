@@ -8,7 +8,6 @@ SWITCH_MODULE_DEFINITION(mod_hangup_detect, mod_asr_load, mod_asr_shutdown, NULL
 
 static struct {
     switch_memory_pool_t *pool;
-    //配置变量
     int deleteFileScore = 90;
     int maxSampleSec = 10;
     char* pcmDir = "/data/freeswitch";
@@ -32,7 +31,7 @@ typedef struct {
 } standard_audio_t;
 //全局变量
 
-SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
+SWITCH_MODULE_DEFINITION(mod_asr, mod_asr_load, mod_asr_shutdown, NULL);
 
 
 static switch_bool_t asr_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)

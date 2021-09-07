@@ -159,7 +159,7 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_asr_load)
     SWITCH_ADD_APP(app_interface, "start_hd", "start hd", "start hangup detect", start_asr_session_function, "", SAF_MEDIA_TAP);
     SWITCH_ADD_APP(app_interface, "stop_hd", "stop hd", "stop hangup detect", stop_asr_session_function, "", SAF_NONE);
     return SWITCH_STATUS_SUCCESS;
- 
+}
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_asr_shutdown)
 {
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, " hangup detect shutdown\n");

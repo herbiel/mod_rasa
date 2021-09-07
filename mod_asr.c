@@ -1,5 +1,4 @@
 #include <switch.h>
-#include <curl/curl.h>
 #define MAX_PATH_LEN (256)
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_asr_load);
@@ -13,6 +12,7 @@ static struct {
     char* pcmDir = "/data/freeswitch";
     char* sampleDir = "/data/freeswitch/sample";
 } globals;
+
 typedef struct {
     switch_core_session_t   *session;
     switch_media_bug_t      *bug;
@@ -31,8 +31,48 @@ typedef struct {
 } standard_audio_t;
 //全局变量
 
-
-
+//全局变量
+standard_audio_t *standardAudio[10];
+int standardAudioSize = 0;
+void* initStandardAudioByDir(void *data) {
+    char* path = (char *) data;
+    DIR *d = NULL;
+    struct dirent *dp = NULL; /* readdir函数的返回值就存放在这个结构体中 */
+    struct stat st;
+    char p[MAX_PATH_LEN] = {0};
+    if(stat(path, &st) < 0 || !S_ISDIR(st.st_mode)) {
+        switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "HD mod invalid path: %s\n", path);
+        return NULL;
+    }
+    if(!(d = opendir(path))) {
+        switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "HD mod opendir[%s] error: %m\n", path);
+        return NULL;
+    }
+    while((dp = readdir(d)) != NULL) {
+        /* 把当前目录.，上一级目录..及隐藏文件都去掉，避免死循环遍历目录 */
+        if((!strncmp(dp->d_name, ".", 1)) || (!strncmp(dp->d_name, "..", 2)))
+            continue;
+        snprintf(p, sizeof(p) - 1, "%s/%s", path, dp->d_name);
+        stat(p, &st);
+        if(!S_ISDIR(st.st_mode)) {
+            initStandardAudio(p, dp->d_name);
+        }
+    }
+    closedir(d);
+    pthread_exit(NULL);
+}
+bool initStandardAudio(char *filePath, char *fileName) {
+    double *standardData;
+    long size = calculateStandard(filePath, &standardData);
+    standard_audio_t *sa1 = (standard_audio_t *)malloc(sizeof(standard_audio_t));
+    strcpy(sa1->audioName, fileName);
+    sa1->size = size;
+    sa1->standardData = standardData;
+    standardAudio[standardAudioSize] = sa1;
+    switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "initStandardAudio, name:%s, size:%d\n", standardAudio[standardAudioSize]->audioName, standardAudio[standardAudioSize]->size);
+    standardAudioSize++;
+    return true;
+}
 static switch_bool_t asr_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)
 {
     switch_da_t *pvt = (switch_da_t *)user_data;

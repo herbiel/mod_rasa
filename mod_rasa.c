@@ -53,7 +53,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 
 	if ((status = switch_core_media_bug_add(session, "my_rasa", "",
 										record_callback, "", 0, SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING, &bug)) != SWITCH_STATUS_SUCCESS) {
-	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file %s\n", file);
+	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file \n");
 	}
 
 }

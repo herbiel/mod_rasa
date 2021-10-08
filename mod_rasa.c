@@ -18,14 +18,16 @@ SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
 
 SWITCH_STANDARD_API(rasa_function){
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "rasa load success\n",p);
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "rasa load success\n");
 	return SWITCH_STATUS_SUCCESS;
 }
 
 SWITCH_STANDARD_APP(rasa_session_function)
 {
 	switch_channel_t *channel = switch_core_session_get_channel(session);
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, switch_channel_get_variable(channel, "uuid"));
+	const char *p;
+	p = switch_channel_get_variable(channel, "uuid");
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "[%s]!\n",p);
 }
 // Actually it explains as followings:
 // switch_status_t mod_rasa_load(switch_loadable_module_interface_t **module_interface, switch_memory_pool_t *pool)

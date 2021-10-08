@@ -22,12 +22,44 @@ SWITCH_STANDARD_API(rasa_function){
 	return SWITCH_STATUS_SUCCESS;
 }
 
+static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)
+{
+	switch (type) {
+	case SWITCH_ABC_TYPE_INIT: {//媒体bug设置成功
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----1 \n");
+		break;
+	}
+	case SWITCH_ABC_TYPE_CLOSE: { //媒体流关闭 资源回收
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----2 \n");
+		break;
+	}
+	case SWITCH_ABC_TYPE_READ_REPLACE: {//读取到音频流
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----2 \n");
+		break;
+	}
+	default: {
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "default type=%s", to_string(type).c_str());
+		break;
+	}
+}
+return SWITCH_TRUE;
+}
+
+
 SWITCH_STANDARD_APP(rasa_session_function)
 {
 	switch_channel_t *channel = switch_core_session_get_channel(session);
-	const char *call_uuid;
-	call_uuid = switch_channel_get_variable(channel, "uuid");
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "test uuid is [%s]!\n",call_uuid);
+	switch_media_bug_t *bug;
+	switch_status_t status;
+	time_t to = 0;
+	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
+	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;
+
+	if ((status = switch_core_media_bug_add(session, "my_rasa", file,
+										record_callback, "", to, flags, &bug)) != SWITCH_STATUS_SUCCESS) {
+	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file %s\n", file);
+	}
+
 }
 // Actually it explains as followings:
 // switch_status_t mod_rasa_load(switch_loadable_module_interface_t **module_interface, switch_memory_pool_t *pool)

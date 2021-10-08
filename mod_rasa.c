@@ -25,9 +25,7 @@ SWITCH_STANDARD_API(rasa_function){
 SWITCH_STANDARD_APP(rasa_session_function)
 {
 	switch_channel_t *channel = switch_core_session_get_channel(session);
-	const char *p;
-	p = switch_channel_get_variable(channel, "uuid");
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "[%s]!\n",p);
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, switch_channel_get_variable(channel, "uuid"));
 }
 // Actually it explains as followings:
 // switch_status_t mod_rasa_load(switch_loadable_module_interface_t **module_interface, switch_memory_pool_t *pool)

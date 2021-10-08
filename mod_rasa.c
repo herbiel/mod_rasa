@@ -48,16 +48,14 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 
 SWITCH_STANDARD_APP(rasa_session_function)
 {
-	switch_channel_t *channel = switch_core_session_get_channel(session);
 	switch_media_bug_t *bug;
 	switch_status_t status;
 	char *file = NULL;
-	file = '/var/lib/freeswitch/recordings/test/test.wav';
-	time_t to = 0;
+	file = 'test.wav';
 	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
 
 	if ((status = switch_core_media_bug_add(session, "my_rasa", file,
-										record_callback, "", to, flags, &bug)) != SWITCH_STATUS_SUCCESS) {
+										record_callback, "", 0, flags, &bug)) != SWITCH_STATUS_SUCCESS) {
 	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file %s\n", file);
 	}
 

@@ -1,5 +1,5 @@
 #include <switch.h>
-
+#include <cstring>
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load);
 SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime);
@@ -51,6 +51,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	switch_channel_t *channel = switch_core_session_get_channel(session);
 	switch_media_bug_t *bug;
 	switch_status_t status;
+	char *file = '/var/lib/freeswitch/recordings/test/test.wav';
 	time_t to = 0;
 	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
 	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;

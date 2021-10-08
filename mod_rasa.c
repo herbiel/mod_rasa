@@ -42,7 +42,7 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 		break;
 	}
 }
-return SWITCH_TRUE;
+	return SWITCH_TRUE;
 }
 
 

@@ -37,7 +37,7 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
     *module_interface = switch_loadable_module_create_module_interface(pool, modname);
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello World!\n");
     SWITCH_ADD_API(api_interface, "rasa", "RASA API", rasa_function, "syntax");
-	SWITCH_ADD_APP(app_interface, "my_rasa", "my_rasa", "my_rasa", asa_session_function, SYNTAX_PLAYBACK, SAF_NONE);
+	SWITCH_ADD_APP(app_interface, "my_rasa", "my_rasa", "my_rasa", rasa_session_function, SYNTAX_PLAYBACK, SAF_NONE);
     return SWITCH_STATUS_SUCCESS;
 }
 

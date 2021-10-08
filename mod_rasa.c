@@ -1,5 +1,5 @@
 #include <switch.h>
-#include <cstring>
+#include <string.h>
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load);
 SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime);

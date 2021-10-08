@@ -1,5 +1,5 @@
 #include <switch.h>
-#include <string.h>
+
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load);
 SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime);
@@ -38,7 +38,7 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 		break;
 	}
 	default: {
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "default type=%s", to_string(type).c_str());
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "default tyep", type);
 		break;
 	}
 }
@@ -51,10 +51,10 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	switch_channel_t *channel = switch_core_session_get_channel(session);
 	switch_media_bug_t *bug;
 	switch_status_t status;
-	char *file = '/var/lib/freeswitch/recordings/test/test.wav';
+	char *file = NULL;
+	file = '/var/lib/freeswitch/recordings/test/test.wav';
 	time_t to = 0;
 	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
-	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;
 
 	if ((status = switch_core_media_bug_add(session, "my_rasa", file,
 										record_callback, "", to, flags, &bug)) != SWITCH_STATUS_SUCCESS) {

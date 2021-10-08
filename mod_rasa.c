@@ -1,5 +1,5 @@
 #include <switch.h>
-#include <string>
+
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load);
 SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime);
@@ -38,7 +38,7 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 		break;
 	}
 	default: {
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "default type %s", to_string(type).c_str());
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, type);
 		break;
 	}
 }

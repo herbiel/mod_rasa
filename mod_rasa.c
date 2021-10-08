@@ -38,7 +38,7 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 		break;
 	}
 	default: {
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, type);
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "test all");
 		break;
 	}
 }

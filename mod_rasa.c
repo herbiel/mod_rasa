@@ -34,6 +34,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
     // init module interface
     switch_api_interface_t *api_interface;
+	switch_application_interface_t *app_interface;
     *module_interface = switch_loadable_module_create_module_interface(pool, modname);
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello World!\n");
     SWITCH_ADD_API(api_interface, "rasa", "RASA API", rasa_function, "syntax");

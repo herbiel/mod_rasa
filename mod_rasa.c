@@ -38,7 +38,7 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 		break;
 	}
 	default: {
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "default tyep", type);
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "default type %s", type);
 		break;
 	}
 }
@@ -50,12 +50,9 @@ SWITCH_STANDARD_APP(rasa_session_function)
 {
 	switch_media_bug_t *bug;
 	switch_status_t status;
-	char *file = NULL;
-	file = 'test.wav';
-	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
 
-	if ((status = switch_core_media_bug_add(session, "my_rasa", file,
-										record_callback, "", 0, flags, &bug)) != SWITCH_STATUS_SUCCESS) {
+	if ((status = switch_core_media_bug_add(session, "my_rasa", "",
+										record_callback, "", 0, SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING, &bug)) != SWITCH_STATUS_SUCCESS) {
 	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file %s\n", file);
 	}
 

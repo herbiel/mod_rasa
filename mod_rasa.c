@@ -59,13 +59,13 @@ SWITCH_STANDARD_APP(rasa_session_function)
 }
 
 
-SWITCH_STANDARD_API(start_rasa_function)
+SWITCH_STANDARD_APP(start_rasa_function)
 {
-	switch_status_t status = SWITCH_STATUS_SUCCESS;
+
 	switch_channel_t *channel = switch_core_session_get_channel(session);
 	const char *call_uuid = switch_channel_get_variable(channel, "uuid");
 	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);
-	return status;
+
 }
 // Actually it explains as followings:
 // switch_status_t mod_rasa_load(switch_loadable_module_interface_t **module_interface, switch_memory_pool_t *pool)
@@ -76,7 +76,7 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
     *module_interface = switch_loadable_module_create_module_interface(pool, modname);
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello World!\n");
     SWITCH_ADD_API(api_interface, "rasa", "RASA API", rasa_function, "syntax");
-	SWITCH_ADD_API(api_interface, "start_rasa", "RASA API", start_rasa_function, "syntax");
+	SWITCH_ADD_APP(app_interface, "start_rasa", "Start RASA APP", start_rasa_function, "", SAF_NONE);
 	SWITCH_ADD_APP(app_interface, "my_rasa", "my_rasa", "my_rasa", rasa_session_function, "", SAF_NONE);
     return SWITCH_STATUS_SUCCESS;
 }

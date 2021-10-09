@@ -67,8 +67,6 @@ SWITCH_STANDARD_APP(rasa_session_function)
 
 SWITCH_STANDARD_APP(start_rasa_function)
 {
-	switch_channel_t *channel;
-	channel = switch_core_session_get_channel(session);
 	switch_channel_t *channel = switch_core_session_get_channel(session);
 	const char *call_uuid = switch_channel_get_variable(channel, "uuid");
 	//switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);

@@ -64,7 +64,7 @@ SWITCH_STANDARD_API(start_rasa_function)
 	switch_status_t status = SWITCH_STATUS_SUCCESS;
 	switch_channel_t *channel = switch_core_session_get_channel(session);
 	const char *call_uuid = switch_channel_get_variable(channel, "uuid");
-	witch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);
+	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);
 	return status;
 }
 // Actually it explains as followings:

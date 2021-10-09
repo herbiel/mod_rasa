@@ -1,6 +1,5 @@
 #include <switch.h>
-#include "mod_spandsp.h"
-#include <spandsp/version.h>
+
 
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load);
@@ -36,7 +35,12 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 		break;
 	}
 	case SWITCH_ABC_TYPE_READ_REPLACE: {//读取到音频流
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----2 \n");
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----READ_REPLACE: \n");
+		break;
+	}
+	case SWITCH_ABC_TYPE_READ_PING:
+	{//读取到音频流
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----READ_PING \n");
 		break;
 	}
 	default: {
@@ -68,7 +72,7 @@ SWITCH_STANDARD_APP(start_rasa_function)
 	switch_channel_t *channel = switch_core_session_get_channel(session);
 	const char *call_uuid = switch_channel_get_variable(channel, "uuid");
 	//switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);
-	callprogress_detector_start(session,'1');
+	//callprogress_detector_start(session,'1');
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);
 
 }

@@ -72,7 +72,7 @@ SWITCH_STANDARD_APP(start_rasa_function)
 	//switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);
 	//callprogress_detector_start(session,'1');
 	char *file_path = NULL;
-	file_path = '/var/wwww/test';
+	file_path = "/var/wwww/test";
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "test show uuid is %s %s\n",call_uuid,file_path);
 
 }

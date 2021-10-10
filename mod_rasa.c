@@ -71,7 +71,9 @@ SWITCH_STANDARD_APP(start_rasa_function)
 	const char *call_uuid = switch_channel_get_variable(channel, "uuid");
 	//switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);
 	//callprogress_detector_start(session,'1');
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "test show uuid is %s \n",call_uuid);
+	char *file_path = NULL;
+	file_path = '/var/wwww/test'
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "test show uuid is %s %s\n",call_uuid,file_path);
 
 }
 // Actually it explains as followings:

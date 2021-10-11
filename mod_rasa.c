@@ -157,7 +157,12 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file %s\n", path);
 	switch_goto_status(status, err);
 	}
+	switch_core_media_bug_set_pre_buffer_framecount(bug, 25);
 	switch_channel_set_private(channel, path, bug);
+	err:
+	record_helper_destroy(&rh, session);
+
+	return status;
 
 }
 

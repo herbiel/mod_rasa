@@ -170,6 +170,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
 	struct record_helper *rh = NULL;
 	char *path = NULL;
+	path = switch_core_session_strdup(session, data);
 	uint8_t channels;
 	switch_codec_implementation_t read_impl = { 0 };
 	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;

@@ -174,7 +174,6 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	uint8_t channels;
 	switch_codec_implementation_t read_impl = { 0 };
 	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;
-	path = switch_core_session_strdup(session, data);
 	switch_core_session_get_read_impl(session, &read_impl);
 	channels = read_impl.number_of_channels;
 	switch_core_file_open(fh, path, channels, read_impl.actual_samples_per_second, file_flags, NULL);
@@ -216,7 +215,7 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load) {
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Hello World!\n");
     SWITCH_ADD_API(api_interface, "rasa", "RASA API", rasa_function, "syntax");
 	SWITCH_ADD_APP(app_interface, "start_my_rasa", "start_my_rasa", "start_my_rasa", start_rasa_function, "<path>", SAF_NONE);
-	SWITCH_ADD_APP(app_interface, "my_rasa", "my_rasa", "my_rasa", rasa_session_function, "<path>", SAF_NONE);
+	SWITCH_ADD_APP(app_interface, "my_rasa", "my_rasa", "my_rasa", rasa_session_function, "<path>", SAF_MEDIA_TAP);
     return SWITCH_STATUS_SUCCESS;
 }
 

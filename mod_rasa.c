@@ -130,7 +130,7 @@ static switch_bool_t rasa_record_callback(switch_media_bug_t *bug, void *user_da
 
 SWITCH_STANDARD_APP(rasa_session_function)
 {
-	switch_file_handle_t *fh;
+	switch_file_handle_t *fh = NULL;
 	switch_media_bug_t *bug;
 	time_t to = 0;
 	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;

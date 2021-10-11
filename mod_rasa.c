@@ -144,7 +144,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	channels = read_impl.number_of_channels;
 	switch_core_file_open(fh, path, channels, read_impl.actual_samples_per_second, file_flags, NULL);
 	record_helper_create(&rh, session);
-	fh = switch_core_alloc(rh->helper_pool, sizeof(*fh);
+	fh = switch_core_alloc(rh->helper_pool, sizeof(*fh));
 	rh->fh = fh;
 	switch_core_media_bug_add(session, "my_rasa", path,rasa_record_callback, rh, to, flags, &bug);
 

@@ -190,7 +190,6 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	err:
 	record_helper_destroy(&rh, session);
 
-	return status;
 
 }
 

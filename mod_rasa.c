@@ -137,7 +137,6 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	char *path = NULL;
 	uint8_t channels;
 	switch_codec_implementation_t read_impl = { 0 };
-	switch_file_handle_t *fh;
 	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;
 	path = switch_core_session_strdup(session, data);
 	switch_core_session_get_read_impl(session, &read_impl);

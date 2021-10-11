@@ -6,6 +6,19 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_rasa_load);
 SWITCH_MODULE_RUNTIME_FUNCTION(mod_rasa_runtime);
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 
+
+
+// Actually it explains as followings:
+// static const char modname[] = "mod_rasa";
+// SWITCH_MOD_DECLARE_DATA switch_loadable_module_function_table_t mod_rasa_module_interface ={
+//  SWITCH_API_VERSION,
+//  mod_rasa_load,
+//  mod_rasa_shutdown,
+//  mod_rasa_runtime(NULL),
+//  SMODF_NONE
+// }
+SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
+
 struct record_helper {
 	switch_media_bug_t *bug;
 	switch_memory_pool_t *helper_pool;
@@ -42,18 +55,31 @@ struct record_helper {
 	int start_event_sent;
 	switch_event_t *variables;
 };
+static switch_status_t record_helper_create(struct record_helper **rh, switch_core_session_t *session)
+{
+	switch_status_t status;
+	switch_memory_pool_t *pool;
+	struct record_helper *newrh;
 
-// Actually it explains as followings:
-// static const char modname[] = "mod_rasa";
-// SWITCH_MOD_DECLARE_DATA switch_loadable_module_function_table_t mod_rasa_module_interface ={
-//  SWITCH_API_VERSION,
-//  mod_rasa_load,
-//  mod_rasa_shutdown,
-//  mod_rasa_runtime(NULL),
-//  SMODF_NONE
-// }
-SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
+	assert(rh);
+	assert(session);
 
+	if ((status = switch_core_new_memory_pool(&pool)) != SWITCH_STATUS_SUCCESS) {
+		return status;
+	}
+
+	if (!(newrh = switch_core_alloc(pool, sizeof(*newrh)))) {
+		switch_core_destroy_memory_pool(&pool);
+		return SWITCH_STATUS_MEMERR;
+	}
+
+	newrh->helper_pool = pool;
+	newrh->recording_session = session;
+
+	*rh = newrh;
+
+	return SWITCH_STATUS_SUCCESS;
+}
 SWITCH_STANDARD_API(rasa_function){
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "rasa load success\n");
 	return SWITCH_STATUS_SUCCESS;
@@ -62,7 +88,6 @@ SWITCH_STANDARD_API(rasa_function){
 static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)
 {
 	struct record_helper *rh = (struct record_helper *) user_data;
-	switch_size_t len = 0;
 	switch (type) {
 	case SWITCH_ABC_TYPE_INIT: {//媒体bug设置成功
 		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----1 \n");

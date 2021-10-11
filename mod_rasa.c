@@ -132,21 +132,20 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 SWITCH_STANDARD_APP(rasa_session_function)
 {
 	switch_media_bug_t *bug;
-	switch_status_t status;
 	time_t to = 0;
 	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
 	struct record_helper *rh = NULL;
 	char *path = NULL;
+	uint8_t channels;
+	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;
 	path = switch_core_session_strdup(session, data);
-	if ((status = record_helper_create(&rh, session)) != SWITCH_STATUS_SUCCESS) {
-		return status;
-	}
-	fh = switch_core_alloc(rh->helper_pool, sizeof(*fh)
+	switch_core_session_get_read_impl(session, &read_impl);
+	channels = read_impl.number_of_channels;
+	switch_core_file_open(fh, path, channels, read_impl.actual_samples_per_second, file_flags, NULL);
+	record_helper_create(&rh, session);
+	fh = switch_core_alloc(rh->helper_pool, sizeof(*fh);
 	rh->fh = fh;
-	if ((status = switch_core_media_bug_add(session, "my_rasa", path,
-										record_callback, rh, to, flags, &bug)) != SWITCH_STATUS_SUCCESS) {
-	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file \n");
-	}
+	switch_core_media_bug_add(session, "my_rasa", path,record_callback, rh, to, flags, &bug);
 
 }
 

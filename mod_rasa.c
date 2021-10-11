@@ -106,12 +106,11 @@ static switch_bool_t rasa_record_callback(switch_media_bug_t *bug, void *user_da
 		switch_size_t len;
 		uint8_t data[SWITCH_RECOMMENDED_BUFFER_SIZE];
 		switch_frame_t frame = { 0 };
-		switch_status_t status;
 		int i = 0;
 		frame.data = data;
 		frame.buflen = SWITCH_RECOMMENDED_BUFFER_SIZE;
 		for (;;) {
-			status = switch_core_media_bug_read(bug, &frame, i++ == 0 ? SWITCH_FALSE : SWITCH_TRUE);
+			switch_core_media_bug_read(bug, &frame, i++ == 0 ? SWITCH_FALSE : SWITCH_TRUE);
 			len = (switch_size_t) frame.datalen / 2 / frame.channels;
 			switch_core_file_write(rh->fh, data, &len);
 			rh->writes++;

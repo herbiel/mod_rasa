@@ -138,9 +138,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	struct record_helper *rh = NULL;
 	char *path = NULL;
 	path = switch_core_session_strdup(session, data);
-	if ((status = record_helper_create(&rh, session)) != SWITCH_STATUS_SUCCESS) {
-		return status;
-	}
+	record_helper_create(&rh, session)
 	fh = switch_core_alloc(rh->helper_pool, sizeof(*fh)
 	rh->fh = fh;
 	if ((status = switch_core_media_bug_add(session, "my_rasa", path,

@@ -154,7 +154,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	rh->fh = fh;
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "test show path is %s \n",path);
 	if ((status = switch_core_media_bug_add(session, "my_rasa", path,rasa_record_callback, rh, to, flags, &bug)) != SWITCH_STATUS_SUCCESS) {
-	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file %s\n", file);
+	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file %s\n", path);
 	switch_goto_status(status, err);
 	}
 	switch_channel_set_private(channel, path, bug);

@@ -80,6 +80,34 @@ static switch_status_t record_helper_create(struct record_helper **rh, switch_co
 
 	return SWITCH_STATUS_SUCCESS;
 }
+
+static switch_status_t record_helper_destroy(struct record_helper **rh, switch_core_session_t *session)
+{
+	switch_memory_pool_t *pool;
+
+	assert(rh);
+	assert(*rh);
+	assert(session);
+
+	if ((*rh)->recording_session != session) {
+		switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Destroying a record helper of another session!\n");
+	}
+
+	if ((*rh)->native) {
+		switch_core_file_close(&(*rh)->in_fh);
+		switch_core_file_close(&(*rh)->out_fh);
+	} else if((*rh)->fh) {
+		switch_core_file_close((*rh)->fh);
+	}
+
+	pool = (*rh)->helper_pool;
+	switch_core_destroy_memory_pool(&pool);
+	*rh = NULL;
+
+	return SWITCH_STATUS_SUCCESS;
+}
+
+
 SWITCH_STANDARD_API(rasa_function){
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "rasa load success\n");
 	return SWITCH_STATUS_SUCCESS;

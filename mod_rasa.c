@@ -85,7 +85,7 @@ SWITCH_STANDARD_API(rasa_function){
 	return SWITCH_STATUS_SUCCESS;
 }
 
-static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)
+static switch_bool_t rasa_record_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)
 {
 	struct record_helper *rh = (struct record_helper *) user_data;
 	switch (type) {
@@ -145,7 +145,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	record_helper_create(&rh, session);
 	fh = switch_core_alloc(rh->helper_pool, sizeof(*fh);
 	rh->fh = fh;
-	switch_core_media_bug_add(session, "my_rasa", path,record_callback, rh, to, flags, &bug);
+	switch_core_media_bug_add(session, "my_rasa", path,rasa_record_callback, rh, to, flags, &bug);
 
 }
 

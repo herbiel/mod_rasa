@@ -61,6 +61,7 @@ SWITCH_STANDARD_API(rasa_function){
 
 static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)
 {
+	struct record_helper *rh = (struct record_helper *) user_data;
 	switch_size_t len = 0;
 	switch (type) {
 	case SWITCH_ABC_TYPE_INIT: {//媒体bug设置成功
@@ -87,7 +88,7 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 		for (;;) {
 			status = switch_core_media_bug_read(bug, &frame, i++ == 0 ? SWITCH_FALSE : SWITCH_TRUE);
 			len = (switch_size_t) frame.datalen / 2 / frame.channels;
-			switch_core_file_write(rh->fh, mask ? null_data : data, &len)
+			switch_core_file_write(rh->fh, data, &len)
 			rh->writes++;
 
 		}

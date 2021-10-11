@@ -170,10 +170,10 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
 	struct record_helper *rh = NULL;
 	char *path = NULL;
-	path = switch_core_session_strdup(session, data);
 	uint8_t channels;
 	switch_codec_implementation_t read_impl = { 0 };
 	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;
+	path = switch_core_session_strdup(session, data);
 	switch_core_session_get_read_impl(session, &read_impl);
 	channels = read_impl.number_of_channels;
 	switch_core_file_open(fh, path, channels, read_impl.actual_samples_per_second, file_flags, NULL);
@@ -189,6 +189,7 @@ SWITCH_STANDARD_APP(rasa_session_function)
 	switch_channel_set_private(channel, path, bug);
 	err:
 	record_helper_destroy(&rh, session);
+
 
 
 }

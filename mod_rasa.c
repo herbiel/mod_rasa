@@ -88,7 +88,7 @@ static switch_bool_t record_callback(switch_media_bug_t *bug, void *user_data, s
 		for (;;) {
 			status = switch_core_media_bug_read(bug, &frame, i++ == 0 ? SWITCH_FALSE : SWITCH_TRUE);
 			len = (switch_size_t) frame.datalen / 2 / frame.channels;
-			switch_core_file_write(rh->fh, data, &len)
+			switch_core_file_write(rh->fh, data, &len);
 			rh->writes++;
 
 		}

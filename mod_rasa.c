@@ -17,6 +17,7 @@ SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_rasa_shutdown);
 //  mod_rasa_runtime(NULL),
 //  SMODF_NONE
 // }
+//
 SWITCH_MODULE_DEFINITION(mod_rasa, mod_rasa_load, mod_rasa_shutdown, NULL);
 
 struct record_helper {
@@ -130,11 +131,6 @@ static switch_bool_t rasa_record_callback(switch_media_bug_t *bug, void *user_da
 		break;
 	}
 	case SWITCH_ABC_TYPE_READ_REPLACE: {//读取到音频流
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----READ_REPLACE: \n");
-		break;
-	}
-	case SWITCH_ABC_TYPE_READ_PING:
-	{//读取到音频流
 		switch_size_t len;
 		uint8_t data[SWITCH_RECOMMENDED_BUFFER_SIZE];
 		switch_frame_t frame = { 0 };
@@ -151,6 +147,7 @@ static switch_bool_t rasa_record_callback(switch_media_bug_t *bug, void *user_da
 		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----READ_PING \n");
 		break;
 	}
+
 	default: {
 		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "test all");
 		break;

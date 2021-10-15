@@ -28,47 +28,6 @@ SWITCH_STANDARD_API(rasa_function){
 	return SWITCH_STATUS_SUCCESS;
 }
 
-static switch_bool_t rasa_record_callback(switch_media_bug_t *bug, void *user_data, switch_abc_type_t type)
-{
-	switch_core_session_t *session = switch_core_media_bug_get_session(bug);
-	struct record_helper *rh = (struct record_helper *) user_data;
-	if (rh->recording_session != session) {
-		return SWITCH_FALSE;
-	}
-	switch (type) {
-	case SWITCH_ABC_TYPE_INIT: {//媒体bug设置成功
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----1 \n");
-		break;
-	}
-	case SWITCH_ABC_TYPE_CLOSE: { //媒体流关闭 资源回收
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----2 \n");
-		break;
-	}
-	case SWITCH_ABC_TYPE_READ_REPLACE: {//读取到音频流
-		switch_size_t len;
-		uint8_t data[SWITCH_RECOMMENDED_BUFFER_SIZE];
-		switch_frame_t frame = { 0 };
-		int i = 0;
-		frame.data = data;
-		frame.buflen = SWITCH_RECOMMENDED_BUFFER_SIZE;
-		for (;;) {
-			switch_core_media_bug_read(bug, &frame, i++ == 0 ? SWITCH_FALSE : SWITCH_TRUE);
-			len = (switch_size_t) frame.datalen / 2 / frame.channels;
-			switch_core_file_write(rh->fh, data, &len);
-			rh->writes++;
-
-		}
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "test -----READ_PING \n");
-		break;
-	}
-
-	default: {
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "test all");
-		break;
-	}
-}
-	return SWITCH_TRUE;
-}
 
 
 SWITCH_STANDARD_APP(rasa_session_function)

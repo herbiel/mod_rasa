@@ -159,35 +159,9 @@ static switch_bool_t rasa_record_callback(switch_media_bug_t *bug, void *user_da
 
 SWITCH_STANDARD_APP(rasa_session_function)
 {
-	switch_channel_t *channel = switch_core_session_get_channel(session);
-	switch_file_handle_t *fh = NULL;
-	switch_media_bug_t *bug;
-	switch_status_t status;
-	time_t to = 0;
-	switch_media_bug_flag_t flags = SMBF_READ_STREAM | SMBF_WRITE_STREAM | SMBF_READ_PING;
-	struct record_helper *rh = NULL;
-	char *path = NULL;
-	uint8_t channels;
-	switch_codec_implementation_t read_impl = { 0 };
-	int file_flags = SWITCH_FILE_FLAG_WRITE | SWITCH_FILE_DATA_SHORT;
-	path = switch_core_session_strdup(session, data);
-	switch_core_session_get_read_impl(session, &read_impl);
-	channels = read_impl.number_of_channels;
-	switch_core_file_open(fh, path, channels, read_impl.actual_samples_per_second, file_flags, NULL);
-	record_helper_create(&rh, session);
-	fh = switch_core_alloc(rh->helper_pool, sizeof(*fh));
-	rh->fh = fh;
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "test show path is %s \n",path);
-	if ((status = switch_core_media_bug_add(session, "my_rasa", path,rasa_record_callback, rh, to, flags, &bug)) != SWITCH_STATUS_SUCCESS) {
-	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "Error adding media bug for file %s\n", path);
-	switch_goto_status(status, err);
-	}
-	switch_core_media_bug_set_pre_buffer_framecount(bug, 25);
-	switch_channel_set_private(channel, path, bug);
-	err:
-	record_helper_destroy(&rh, session);
 
 
+	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show YYYYYYYYYYY");
 
 }
 

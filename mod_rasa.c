@@ -33,8 +33,13 @@ SWITCH_STANDARD_API(rasa_function){
 SWITCH_STANDARD_APP(rasa_session_function)
 {
 
-
+	switch_file_handle_t *fh;
+	char *path = NULL;
+	uint32_t limit = 0;
+	path = "/var/lib/freeswitch/recordings/test.wav";
+    switch_ivr_record_session_event(session, file, limit, fh, NULL);
 	switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "test show YYYYYYYYYYY");
+
 
 }
 
